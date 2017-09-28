@@ -238,7 +238,7 @@ public final class Boolean implements java.io.Serializable,
      * @since  1.5
      */
     public int compareTo(Boolean b) {
-        return (b.value == value ? 0 : (value ? 1 : -1));
+        return (b.value == value ? 0 : (value ? 1 : -1)); //true > false ,you can take true as 1,and zero as 0
     }
 
     private static boolean toBoolean(String name) { 
