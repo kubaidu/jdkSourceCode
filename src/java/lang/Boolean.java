@@ -192,7 +192,7 @@ public final class Boolean implements java.io.Serializable,
      *          same value; <code>false</code> otherwise.
      */
     public boolean equals(Object obj) {
-	if (obj instanceof Boolean) {
+	if (obj instanceof Boolean) {// take an instanceof before  type convert is a good habit, when obj is null,u will get false
 	    return value == ((Boolean)obj).booleanValue();
 	} 
 	return false;
