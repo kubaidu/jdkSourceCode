@@ -65,7 +65,7 @@ public final class Byte extends Number implements Comparable<Byte> {
 
 	static {
 	    for(int i = 0; i < cache.length; i++)
-		cache[i] = new Byte((byte)(i - 128));
+		cache[i] = new Byte((byte)(i - 128)); //cache[0] = -128 , cache[255] = 127 
 	}
     }
 
@@ -82,7 +82,7 @@ public final class Byte extends Number implements Comparable<Byte> {
      * @return a <tt>Byte</tt> instance representing <tt>b</tt>.
      * @since  1.5
      */
-    public static Byte valueOf(byte b) {
+    public static Byte valueOf(byte b) {//the method is recommended except  need a new instance, cache! cache! cache!
 	final int offset = 128;
 	return ByteCache.cache[(int)b + offset];
     }
@@ -104,7 +104,7 @@ public final class Byte extends Number implements Comparable<Byte> {
      * @exception	NumberFormatException if the string does not
      *			contain a parsable <code>byte</code>.
      */
-    public static byte parseByte(String s) throws NumberFormatException {
+    public static byte parseByte(String s) throws NumberFormatException { //return the radix 10 byte , string contains [0-9,-]
 	return parseByte(s, 10);
     }
 
@@ -148,7 +148,7 @@ public final class Byte extends Number implements Comparable<Byte> {
      */
     public static byte parseByte(String s, int radix)
 	throws NumberFormatException {
-	int i = Integer.parseInt(s, radix);
+	int i = Integer.parseInt(s, radix);  //parse to int  ,then check the range [-128.127]
 	if (i < MIN_VALUE || i > MAX_VALUE)
 	    throw new NumberFormatException(
                 "Value out of range. Value:\"" + s + "\" Radix:" + radix);
@@ -181,7 +181,7 @@ public final class Byte extends Number implements Comparable<Byte> {
      */
     public static Byte valueOf(String s, int radix)
 	throws NumberFormatException {
-	return new Byte(parseByte(s, radix));
+	return new Byte(parseByte(s, radix)); // here ,you can see, a new object per time, no cache.
     }
 
     /**
@@ -204,7 +204,7 @@ public final class Byte extends Number implements Comparable<Byte> {
      * @exception	NumberFormatException If the <code>String</code> does
      *			not contain a parsable <code>byte</code>.
      */
-    public static Byte valueOf(String s) throws NumberFormatException {
+    public static Byte valueOf(String s) throws NumberFormatException {//just byte can get a cache object,otherwise,just a new object
 	return valueOf(s, 10);
     }
 
@@ -406,7 +406,7 @@ public final class Byte extends Number implements Comparable<Byte> {
      */
     public boolean equals(Object obj) {
 	if (obj instanceof Byte) {
-	    return value == ((Byte)obj).byteValue();
+	    return value == ((Byte)obj).byteValue(); //type & value is the same
 	}
 	return false;
     }
